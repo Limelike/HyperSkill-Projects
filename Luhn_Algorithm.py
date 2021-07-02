@@ -1,6 +1,7 @@
 import random
-def luhn_algo(n,y):
+def luhn_algo(n):
         strung = ""
+        y = str(n)
         fifteen = n // 10
         new = ""
         sum_digit = 0
@@ -28,24 +29,25 @@ def luhn_algo(n,y):
             if i.isdigit() == True:
                 q = int(i)
                 sum_digit += q
-        return int((sum_digit) + y)
+        sum_digit += int(y[15])
+        return sum_digit
+last_digit = int(random.randint(0,9))
+card_number = int("400000" + str(random.randint(100000000,999999999)) + str(last_digit))
 def check_sum():
-    return (luhn_algo(card_number,last_digit)) % 10 == 0
+    return (luhn_algo(card_number)) % 10 == 0
+while check_sum != True:
+        last_digit = int(random.randint(0,9))
+        card_number = int("400000" + str(random.randint(100000000,999999999)) + str(last_digit))
+        if(check_sum()) == True:
+            break
 
 initial = int
 second_initial = int
 while initial != 0:
     initial = int(input("1. Create an account \n2. Log into account \n0.Exit\n"))
     if initial == 1:
-        last_digit = int(random.randint(0,9))
-        card_number = int("400000" + str(random.randint(100000000,999999999)) + str(last_digit))
-        print(card_number)
         print("Your account has been created")
-        while check_sum() == False:
-            last_digit = int(random.randint(0,9))
-            card_number = int("400000" + str(random.randint(100000000,999999999)) + str(last_digit))
-        else:
-            print(card_number)
+        print(card_number)
         pin = random.randint(1000,9999)
         print(pin)
         if initial == 2:
